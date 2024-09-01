@@ -8,6 +8,10 @@ def main():
     df = ls.load_or_download_info(tl.tickers)
     print(df.head())
 
+    # Carica i dati 'conto economico trimestrale' dal file o scarica i nuovi dati da yfinance
+    df = ls.load_or_download_quarterly_income_statement(tl.tickers)
+    print(df.head())
+
 
 # Chiamata alla funzione principale
 if __name__ == '__main__':

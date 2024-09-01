@@ -68,7 +68,7 @@ def get_quarterly_income_statement(ticker):
 
     # Ottieni i dati finanziari
     info = stock.info
-    balance_sheet_trim = stock.quarterly_balance_sheet
+    income_statement_trim = stock.quarterly_financials
 
     # Crea un dizionario con i dati
     data = {
@@ -83,21 +83,16 @@ def get_quarterly_income_statement(ticker):
         'Exchange': info.get('exchange', None),
         'Website': info.get('website', None),
 
-        # info bilancio (ratio)
-        'EBITDA': balance_sheet_trim.get('EBITDA', None),
-        'EBIT': balance_sheet_trim.get('EBIT', None),
-        'Net Interest Income': balance_sheet_trim.get('Net Interest Income', None),
-        'Interest Expense': balance_sheet_trim.get('Interest Expense', None),
-        'Interest Income': balance_sheet_trim.get('Interest Income', None),
-        'Total Expenses': balance_sheet_trim.get('Total expenses', None),
-        'Net Income': balance_sheet_trim.get('Net Income', None),
-        'Minority Interests': balance_sheet_trim.get('Minority Interests', None),
-        'Pretax Income': balance_sheet_trim.get('Pretax Income', None),
-        'Operating Income': balance_sheet_trim.get('Operating Income', None),
-        'Operating Expense': balance_sheet_trim.get('Operating Expense', None),
-
-
 
     }
+
+    # Aggiungi informazioni del bilancio (quarterly income statement) al dizionario 'data'
+    for item in income_statement_trim.index:
+        # Controlla se l'elemento è presente nel DataFrame
+        if item in income_statement_trim.index:
+            # prendi il valore della colonna più recente
+            data[item] = income_statement_trim.loc[item].iloc[0]
+        else:
+            data[item] = None
 
     return data
