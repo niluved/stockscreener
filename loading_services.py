@@ -51,7 +51,7 @@ def load_or_download_quarterly_income_statement(tickers, filename='ticker_quarte
             print("Scelta non valida. Per favore, inserisci 'E' per usare i dati esistenti o 'N' per scaricare nuovi dati.")
 
         if choice == 'e':
-            print(f"Caricamento dei dati generali dal file {filename}...")
+            print(f"Caricamento dei dati trimestrali dal file {filename}...")
             return pd.read_excel(filename)
 
     print("Scaricamento di nuovi dati...")
@@ -60,7 +60,8 @@ def load_or_download_quarterly_income_statement(tickers, filename='ticker_quarte
     for ticker in tickers:
         try:
             data = gf.get_quarterly_income_statement(ticker)
-            all_data.append(data)
+            # Usiamo extend invece di append perché ora riceviamo una lista di dizionari
+            all_data.extend(data)
             # stampa percentuale di progressione
             counter += 1
             percentuale = round(counter / len(tickers) * 100, 1)
@@ -70,6 +71,12 @@ def load_or_download_quarterly_income_statement(tickers, filename='ticker_quarte
 
     df = pd.DataFrame(all_data)
 
+    # Riordina le colonne come richiesto
+    columns_order = ['Ticker', 'Long name', 'Industry', 'Sector', 'FullTimeEmployees',
+                     'Country', 'Currency', 'Exchange', 'Website', 'QUARTER', 'YEAR']
+    remaining_columns = [col for col in df.columns if col not in columns_order]
+    df = df[columns_order + remaining_columns]
+
     df.to_excel(filename, index=False, engine='openpyxl')
-    print(f"I nuovi dati generali sono stati salvati in {filename}")
+    print(f"I nuovi dati trimestrali sono stati salvati in {filename}")
     return df
