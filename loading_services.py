@@ -9,7 +9,7 @@ def load_or_download_info(tickers, filename='ticker_info_data.xlsx'):
     if os.path.exists(filename):
         while True:
             choice = input(
-                f"Il file {filename} esiste già. Vuoi usare i dati esistenti (E) o scaricare nuovi dati (N)? ").lower()
+                f"Il file {filename} contenente i dati GENERALI esiste già. Vuoi usare i dati esistenti (E) o scaricare nuovi dati (N)? ").lower()
             if choice in ['e', 'n']:
                 break
             print("Scelta non valida. Per favore, inserisci 'E' per usare i dati esistenti o 'N' per scaricare nuovi dati.")
@@ -45,7 +45,7 @@ def load_or_download_quarterly_income_statement(tickers, filename='ticker_quarte
     if os.path.exists(filename):
         while True:
             choice = input(
-                f"Il file {filename} esiste già. Vuoi usare i dati esistenti (E) o scaricare nuovi dati (N)? ").lower()
+                f"Il file {filename} contenente i dati TRIMESTRALI esiste già. Vuoi usare i dati esistenti (E) o scaricare nuovi dati (N)? ").lower()
             if choice in ['e', 'n']:
                 break
             print("Scelta non valida. Per favore, inserisci 'E' per usare i dati esistenti o 'N' per scaricare nuovi dati.")
