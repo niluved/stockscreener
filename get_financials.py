@@ -79,7 +79,11 @@ def get_quarterly_income_statement(ticker):
     for date in income_statement_trim.columns:
         # Filtra solo i dati dell'anno corrente e dell'anno precedente
         if date.year in [current_year, previous_year]:
+            quarter = (date.month - 1) // 3 + 1
+            year = str(date.year)[-2:]  # Get the last two digits of the year
             quarter_data = {
+                # Add the new column
+                'RefQuarter': f'Q{quarter}-{year}',
                 # info anagrafiche
                 'Ticker': ticker,
                 'Long name': info.get('longName', None),
@@ -91,7 +95,7 @@ def get_quarterly_income_statement(ticker):
                 'Exchange': info.get('exchange', None),
                 'Website': info.get('website', None),
                 # Calcola il trimestre basato sul mese
-                'QUARTER': (date.month - 1) // 3 + 1,
+                'QUARTER': quarter,
                 'YEAR': date.year,
             }
 
