@@ -1,5 +1,6 @@
 import loading_services as ls
 import ticker_list as tl
+import plot_quarter_services as qs
 
 
 # main function
@@ -17,6 +18,13 @@ def main():
     # stampa il numero di valori unici nella colonna Ticker rispetto al numero totale di ticker iniziali
     print(
         f"{df_income_trim['Ticker'].nunique()} ticker scaricati / {len(tl.tickers)} ticker iniziali")
+
+    # chiedo all'utente di scegliere un ticker
+    ticker = ls.choose_ticker(tl.tickers)
+
+    # stampo il grafico del trend di EBITDA
+    df_ebitda_trend = qs.get_ebitda_data(ticker)
+    qs.plot_ebitda(df_ebitda_trend)
 
 
 # Chiamata alla funzione principale

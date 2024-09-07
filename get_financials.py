@@ -1,6 +1,8 @@
 import yfinance as yf
 from datetime import datetime
 
+# scarico i dati GENERALI  per il ticker specificato
+
 
 def get_info_data(ticker):
     # Scarica i dati per il ticker specificato
@@ -58,6 +60,8 @@ def get_info_data(ticker):
     }
 
     return data
+
+# scarica i dati 'conto economico trimestrale' per il ticker specificato
 
 
 def get_quarterly_income_statement(ticker):

@@ -80,3 +80,10 @@ def load_or_download_quarterly_income_statement(tickers, filename='ticker_quarte
     df.to_excel(filename, index=False, engine='openpyxl')
     print(f"I nuovi dati trimestrali sono stati salvati in {filename}")
     return df
+
+
+def choose_ticker(tickers):
+    for i, ticker in enumerate(tickers):
+        print(f'{i+1}. {ticker}')
+    choice = int(input('Enter the number of the ticker you want to choose: '))
+    return tickers[choice-1]
